@@ -1,0 +1,47 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Publicação automática
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: 📂 Publicando
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: 152.67.48.52
+        username: ubuntu
+        password: ${{ secrets.key }}
+        port: 22
+        protocol: ftps
+        local-dir: ./
+        server-dir: /home/ubuntu/projeto-produto
+    - name: 💣 Aplicando as mudanças
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: 152.67.48.52
+        username: ubuntu
+        key: ${{ secrets.key }}
+        port: 22
+        #server é nome da nossa aplicação no PM2
+        script: pm2 restart server
