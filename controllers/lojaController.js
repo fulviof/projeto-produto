@@ -8,7 +8,7 @@ class LojaController {
     async lojaView(req, res) {
         let produto = new ProdutoModel();
         let listaProdutos = await produto.listarProdutos();
-        res.render('loja/index', {layout: 'loja/index', listaProdutos: listaProdutos});
+        res.render('loja/index', {layout: 'loja/index', listaProdutos: listaProdutos, msg: "Mensagem TESTE"});
     }
 
     async gravarPedido(req, res) {
