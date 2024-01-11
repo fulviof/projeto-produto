@@ -15,7 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Sincronizando com o Github
+      uses: actions/checkout@v3
     - name: 📂 Publicando
       uses: SamKirkland/web-deploy@v1
       with:
