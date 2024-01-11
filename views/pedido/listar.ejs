@@ -1,0 +1,52 @@
+<script src="js/Pedido/listar.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+<div class="logoEmpresa">
+    <img width="200" src="img/logo-jequiti.jpg">
+</div>
+<div>
+    <button id="btnExportarPdf" onclick="window.print()" class="btn btn-primary">Exportar para PDF</button>
+    <button id="btnExportarExcel" class="btn btn-primary">Exportar para Excel</button>
+</div>
+<br>
+<h1>Pedido gerados</h1>
+
+<div>
+    <div class="form-group">
+        <fieldset>
+            <legend>Critérios de busca</legend>
+            <label><input value="numpedido" type="radio" name="criterioBusca" checked> Nº Pedido</label>
+            <br>
+            <label><input value="nomeproduto" type="radio" name="criterioBusca"> Nome do produto</label>
+        </fieldset>
+    </div>
+    <div class="form-group">
+        <label>Termo de busca</label>
+        <div class="input-group mb-3">
+            <input placeholder="Termo de busca" class="form-control" type="text" id="inputBusca">
+            <div>
+                <button class="btn btn-outline-primary" type="button" id="btnPesquisar"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+        </div>
+    </div>
+    
+    <table id="tabelaPedidos" class="table table-striped">
+        <thead>
+            <th>Nº Pedido</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Valor</th>
+        </thead>
+        <tbody>
+            <% lista.forEach(function(value, index) { %>
+                <tr>
+                    <td><%= value.pedidoId %></td>
+                    <td><%= value.produtoNome %></td>
+                    <td><%= value.pedidoItemQuantidade %></td>
+                    <td>R$<%= parseFloat(value.pedidoItemPreco).toFixed(2) %></td>
+                    <td>R$<%= (value.pedidoItemPreco * value.pedidoItemQuantidade).toFixed(2) %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

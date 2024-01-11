@@ -1,0 +1,10 @@
+@media print {
+    .logoEmpresa {
+        display: block;
+        text-align: end;
+    }
+
+    #btnExportarPdf {
+        display: none;
+    }
+}

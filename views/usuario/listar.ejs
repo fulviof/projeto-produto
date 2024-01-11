@@ -1,0 +1,40 @@
+
+<script src="/js/Usuario/listar.js"></script>
+<div>
+    <h1>Usuários cadastrados</h1>
+    <a class="btn btn-primary" href="/usuarios/cadastrar">Cadastrar usuário</a>
+
+    <table style="margin-top:10px" class="table table-stripped">
+        <thead>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Perfil</th>
+            <th>Ativo</th>
+            <th>Ações</th>
+        </thead>
+        <tbody>
+            <% for(let i=0; i<lista.length; i++) { %>
+
+                <tr>
+                    <td><%= lista[i].usuId %></td>
+                    <td><%= lista[i].usuNome %></td>
+                    <td><%= lista[i].usuEmail %></td>
+                    <td><%= lista[i].perDescricao %></td>
+                    <td><%= lista[i].usuAtivo %></td>
+                    <td>
+                        <div>
+                            <a href="/usuarios/alterar/<%= lista[i].usuId %>" class="btn btn-primary">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            <button data-id="<%= lista[i].usuId %>" class="btn btn-danger btnExclusao">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+            <% } %>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,49 @@
+<script src="/js/Usuario/alterar.js"></script>
+<div>
+    <h1>Alterar usuário</h1>
+
+    <div>
+        <input id="usuarioId" type="hidden" value="<%= usuario.usuId %>"/>
+        <div class="form-group">
+            <label for="usuarioNome">Nome:</label>
+            <input value="<%= usuario.usuNome %>" class="form-control" type="text" id="usuarioNome" />
+        </div>
+        <div class="form-group">
+            <label for="">Email:</label>
+            <input value="<%= usuario.usuEmail %>" class="form-control" type="email" id="usuarioEmail" />
+        </div>
+        <div class="form-group">
+            <label for="usuarioPerfil">Perfil:</label>
+            <select class="form-control" id="usuarioPerfil">
+                <option value="0">--Selecione--</option>
+                <% for(let i = 0; i< listaPerfil.length; i++) {
+                    if(usuario.perId == listaPerfil[i].perfilId) { %>
+                        <option selected value="<%= listaPerfil[i].perfilId%>"><%= listaPerfil[i].perfilDescricao%></option>
+                    <% } 
+                    else { %>
+                        <option value="<%= listaPerfil[i].perfilId%>"><%= listaPerfil[i].perfilDescricao%></option>
+                    <% }
+                } %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="usuarioSenha">Senha:</label>
+            <input value="<%= usuario.usuSenha %>" class="form-control" type="password" id="usuarioSenha"/>
+        </div>
+        <div class="form-group">
+            <label for="usuarioAtivo">
+                <% if (usuario.usuAtivo == 'S') { %>
+                    <input checked class="form-check-label mr-2" id="usuarioAtivo" type="checkbox" /> Ativo
+            <% } else { %>
+                    <input class="form-check-label mr-2" id="usuarioAtivo" type="checkbox" /> Ativo
+                <% } %>
+                
+            </label>
+        </div>
+
+        <div>
+            <button id="btnAlterar" class="btn btn-primary">Alterar</button>
+            <a class="btn btn-secondary" href="/usuarios">Voltar</a>
+        </div>
+    </div>
+</div>
