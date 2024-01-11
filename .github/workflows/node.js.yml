@@ -17,15 +17,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: 📂 Publicando
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      uses: SamKirkland/web-deploy@v1
       with:
-        server: 152.67.48.52
-        username: ubuntu
-        password: ${{ secrets.key }}
-        port: 22
-        protocol: ftps
-        local-dir: ./
-        server-dir: /home/ubuntu/projeto-produto/
+        target-server: 152.67.48.52
+        remote-user: ubuntu
+        private-ssh-key: ${{ secrets.key }}
+        destination-path: /home/ubuntu/projeto-produto/
     - name: 💣 Aplicando as mudanças
       uses: appleboy/ssh-action@v1.0.3
       with:
